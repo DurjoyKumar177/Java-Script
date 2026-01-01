@@ -3,176 +3,240 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Problem Set Index</title>
+    <title>Problem Set Index | Code Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #10b981; 
+            --primary-hover: #059669;
+            --bg: #f8fafc;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --card-bg: #ffffff;
+            --border: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+        }
+
+        .table-container {
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 20px 0;
-            font-size: 18px;
-        }
-        table th, table td {
-            padding: 10px;
             text-align: left;
-            border: 1px solid #ddd;
         }
+
+        thead {
+            background-color: #f1f5f9;
+        }
+
+        th {
+            padding: 16px;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border);
+        }
+
+        td {
+            padding: 16px;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.95rem;
+        }
+
+        .problem-link {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .problem-link:hover {
+            color: var(--primary);
+        }
+
         button {
-            padding: 5px 10px;
-            background-color: #4CAF50;
+            padding: 8px 16px;
+            background-color: var(--primary);
             color: white;
             border: none;
+            border-radius: 6px;
+            font-weight: 500;
             cursor: pointer;
+            transition: all 0.2s ease;
         }
+
         button:hover {
-            background-color: #45a049;
+            background-color: var(--primary-hover);
         }
+
+        .img-container {
+            display: none; 
+            padding: 20px;
+            text-align: center;
+            background-color: #f8fafc;
+            border-bottom: 1px solid var(--border);
+            animation: fadeIn 0.3s ease;
+        }
+
         img {
-            display: none;
             max-width: 100%;
-            height: auto;
-            margin-top: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .sn-badge {
+            background: #e2e8f0;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
 
-    <h2>Problem Set Index</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>SN</th>
-                <th>Problem Name</th>
-                <th>Show Code</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Row for Addition of Two Numbers -->
-            <tr>
-                <td>1</td>
-                <td><a href="addition.html">Addition of Two Numbers</a></td>
-                <td><button onclick="showCode('img1')">Show Code</button></td>
-            </tr>
-            <tr>
-                <td colspan="3">
-                    <img id="img1" src="1.jpg" alt="Addition of Two Numbers Solution">
-                </td>
-            </tr>
+    <div class="container">
+        <header>
+            <h2>Problem Set Index</h2>
+            <p class="subtitle">Complete Logical Programming Solutions</p>
+        </header>
 
-            <!-- Row for Subtraction of Two Numbers -->
-            <tr>
-                <td>2</td>
-                <td><a href="subtraction.html">Subtraction of Two Numbers</a></td>
-                <td><button onclick="showCode('img2')">Show Code</button></td>
-            </tr>
-            <tr>
-                <td colspan="3">
-                    <img id="img2" src="2.jpg" alt="Subtraction of Two Numbers Solution">
-                </td>
-            </tr>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Problem Name</th>
+                        <th style="text-align: right;">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="sn-badge">01</span></td>
+                        <td><a href="addition.html" class="problem-link">Addition of Two Numbers</a></td>
+                        <td style="text-align: right;"><button onclick="toggleCode('img1')">View Solution</button></td>
+                    </tr>
+                    <tr><td colspan="3" style="padding:0"><div id="img1" class="img-container"><img src="1.jpg" alt="Solution"></div></td></tr>
 
-            <!-- Row for Greater Among Three Numbers -->
-            <tr>
-                <td>3</td>
-                <td><a href="greater-number.html">Greater Among Three Numbers</a></td>
-                <td><button onclick="showCode('img3')">Show Code</button></td>
-            </tr>
-            <tr>
-                <td colspan="3">
-                    <img id="img3" src="3.jpg" alt="Greater Among Three Numbers Solution">
-                </td>
-            </tr>
+                    <tr>
+                        <td><span class="sn-badge">02</span></td>
+                        <td><a href="subtraction.html" class="problem-link">Subtraction of Two Numbers</a></td>
+                        <td style="text-align: right;"><button onclick="toggleCode('img2')">View Solution</button></td>
+                    </tr>
+                    <tr><td colspan="3" style="padding:0"><div id="img2" class="img-container"><img src="2.jpg" alt="Solution"></div></td></tr>
 
-            <!-- Row for Check Leap Year -->
-            <tr>
-                <td>4</td>
-                <td><a href="leap-year.html">Check Leap Year</a></td>
-                <td><button onclick="showCode('img4')">Show Code</button></td>
-            </tr>
-            <tr>
-                <td colspan="3">
-                    <img id="img4" src="4.jpg" alt="Check Leap Year Solution">
-                </td>
-            </tr>
+                    <tr>
+                        <td><span class="sn-badge">03</span></td>
+                        <td><a href="greater-number.html" class="problem-link">Greater Among Three Numbers</a></td>
+                        <td style="text-align: right;"><button onclick="toggleCode('img3')">View Solution</button></td>
+                    </tr>
+                    <tr><td colspan="3" style="padding:0"><div id="img3" class="img-container"><img src="3.jpg" alt="Solution"></div></td></tr>
 
-            <!-- Row for Find Even and Odd Number -->
-            <tr>
-                <td>5</td>
-                <td><a href="even-odd.html">Find Even and Odd Number</a></td>
-                <td><button onclick="showCode('img5')">Show Code</button></td>
-            </tr>
-            <tr>
-                <td colspan="3">
-                    <img id="img5" src="5.jpg" alt="Find Even and Odd Number Solution">
-                </td>
-            </tr>
+                    <tr>
+                        <td><span class="sn-badge">04</span></td>
+                        <td><a href="leap-year.html" class="problem-link">Check Leap Year</a></td>
+                        <td style="text-align: right;"><button onclick="toggleCode('img4')">View Solution</button></td>
+                    </tr>
+                    <tr><td colspan="3" style="padding:0"><div id="img4" class="img-container"><img src="4.jpg" alt="Solution"></div></td></tr>
 
-            <!-- Row for Check Palindrome -->
-            <tr>
-                <td>6</td>
-                <td><a href="palindrome.html">Check Palindrome</a></td>
-                <td><button onclick="showCode('img6')">Show Code</button></td>
-            </tr>
-            <tr>
-                <td colspan="3">
-                    <img id="img6" src="6.jpg" alt="Check Palindrome Solution">
-                </td>
-            </tr>
+                    <tr>
+                        <td><span class="sn-badge">05</span></td>
+                        <td><a href="even-odd.html" class="problem-link">Find Even and Odd Number</a></td>
+                        <td style="text-align: right;"><button onclick="toggleCode('img5')">View Solution</button></td>
+                    </tr>
+                    <tr><td colspan="3" style="padding:0"><div id="img5" class="img-container"><img src="5.jpg" alt="Solution"></div></td></tr>
 
-            <!-- Row for Find Factorial -->
-            <tr>
-                <td>7</td>
-                <td><a href="factorial.html">Find Factorial of a Number</a></td>
-                <td><button onclick="showCode('img7')">Show Code</button></td>
-            </tr>
-            <tr>
-                <td colspan="3">
-                    <img id="img7" src="7.jpg" alt="Find Factorial Solution">
-                </td>
-            </tr>
+                    <tr>
+                        <td><span class="sn-badge">06</span></td>
+                        <td><a href="palindrome.html" class="problem-link">Check Palindrome</a></td>
+                        <td style="text-align: right;"><button onclick="toggleCode('img6')">View Solution</button></td>
+                    </tr>
+                    <tr><td colspan="3" style="padding:0"><div id="img6" class="img-container"><img src="6.jpg" alt="Solution"></div></td></tr>
 
-            <!-- Row for Check Prime Number -->
-            <tr>
-                <td>8</td>
-                <td><a href="prime.html">Check Prime Number</a></td>
-                <td><button onclick="showCode('img8')">Show Code</button></td>
-            </tr>
-            <tr>
-                <td colspan="3">
-                    <img id="img8" src="8.jpg" alt="Check Prime Number Solution">
-                </td>
-            </tr>
+                    <tr>
+                        <td><span class="sn-badge">07</span></td>
+                        <td><a href="factorial.html" class="problem-link">Find Factorial of a Number</a></td>
+                        <td style="text-align: right;"><button onclick="toggleCode('img7')">View Solution</button></td>
+                    </tr>
+                    <tr><td colspan="3" style="padding:0"><div id="img7" class="img-container"><img src="7.jpg" alt="Solution"></div></td></tr>
 
-            <!-- Row for Reverse a Number -->
-            <tr>
-                <td>9</td>
-                <td><a href="reverse.html">Reverse a Number</a></td>
-                <td><button onclick="showCode('img9')">Show Code</button></td>
-            </tr>
-            <tr>
-                <td colspan="3">
-                    <img id="img9" src="9.jpg" alt="Reverse a Number Solution">
-                </td>
-            </tr>
+                    <tr>
+                        <td><span class="sn-badge">08</span></td>
+                        <td><a href="prime.html" class="problem-link">Check Prime Number</a></td>
+                        <td style="text-align: right;"><button onclick="toggleCode('img8')">View Solution</button></td>
+                    </tr>
+                    <tr><td colspan="3" style="padding:0"><div id="img8" class="img-container"><img src="8.jpg" alt="Solution"></div></td></tr>
 
-            <!-- Row for Temperature Conversion -->
-            <tr>
-                <td>10</td>
-                <td><a href="temp-convert.html">Temperature Conversion (C to F)</a></td>
-                <td><button onclick="showCode('img10')">Show Code</button></td>
-            </tr>
-            <tr>
-                <td colspan="3">
-                    <img id="img10" src="10.jpg" alt="Temperature Conversion Solution">
-                </td>
-            </tr>
-        </tbody>
-    </table>
+                    <tr>
+                        <td><span class="sn-badge">09</span></td>
+                        <td><a href="reverse.html" class="problem-link">Reverse a Number</a></td>
+                        <td style="text-align: right;"><button onclick="toggleCode('img9')">View Solution</button></td>
+                    </tr>
+                    <tr><td colspan="3" style="padding:0"><div id="img9" class="img-container"><img src="9.jpg" alt="Solution"></div></td></tr>
+
+                    <tr>
+                        <td><span class="sn-badge">10</span></td>
+                        <td><a href="temp-convert.html" class="problem-link">Temperature Conversion (C to F)</a></td>
+                        <td style="text-align: right;"><button onclick="toggleCode('img10')">View Solution</button></td>
+                    </tr>
+                    <tr><td colspan="3" style="padding:0"><div id="img10" class="img-container"><img src="10.jpg" alt="Solution"></div></td></tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
 
     <script>
-        function showCode(imgId) {
-            // Toggle the display of the image
-            let imgBlock = document.getElementById(imgId);
-            imgBlock.style.display = imgBlock.style.display === "block" ? "none" : "block";
+        function toggleCode(imgId) {
+            const container = document.getElementById(imgId);
+            const isVisible = container.style.display === "block";
+            
+            // Hide all images first
+            document.querySelectorAll('.img-container').forEach(el => el.style.display = 'none');
+            
+            // Toggle the clicked one
+            container.style.display = isVisible ? "none" : "block";
         }
     </script>
 

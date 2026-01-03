@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Calculator</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --display-bg: #1e1e1e;
+            --btn-bg: #2d2d2d;
+            --btn-text: #ffffff;
+            --accent-color: #bb86fc;
+            --operator-bg: #3700b3;
+            --clear-bg: #cf6679;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: var(--bg-color);
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--btn-text);
+        }
+
+        .calculator {
+            background-color: var(--display-bg);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            width: 320px;
+        }
+
+        .display {
+            background-color: #000;
+            color: #fff;
+            padding: 20px;
+            font-size: 2.5rem;
+            text-align: right;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            min-height: 48px;
+            overflow: hidden;
+            word-wrap: break-word;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        button {
+            background-color: var(--btn-bg);
+            color: var(--btn-text);
+            border: none;
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        button:hover {
+            background-color: #3d3d3d;
+        }
+
+        .operator {
+            background-color: var(--operator-bg);
+            color: #ffffff;
+        }
+        
+        .operator:hover {
+             background-color: #6200ea;
+        }
+
+        .equal {
+            background-color: var(--accent-color);
+            color: #000;
+            grid-column: span 2;
+        }
+        
+        .equal:hover {
+            background-color: #9955e8;
+        }
+
+        .clear {
+            background-color: var(--clear-bg);
+            color: #000;
+            grid-column: span 2;
+        }
+        
+        .clear:hover {
+             background-color: #b00020;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="calculator">
+    <div id="display" class="display">0</div>
+    <div class="buttons">
+        <button class="clear" onclick="clearDisplay()">AC</button>
+        <button onclick="deleteDigit()">DEL</button>
+        <button class="operator" onclick="appendOperator('/')">/</button>
+
+        <button onclick="appendNumber('7')">7</button>
+        <button onclick="appendNumber('8')">8</button>
+        <button onclick="appendNumber('9')">9</button>
+        <button class="operator" onclick="appendOperator('*')">*</button>
+
+        <button onclick="appendNumber('4')">4</button>
+        <button onclick="appendNumber('5')">5</button>
+        <button onclick="appendNumber('6')">6</button>
+        <button class="operator" onclick="appendOperator('-')">-</button>
+
+        <button onclick="appendNumber('1')">1</button>
+        <button onclick="appendNumber('2')">2</button>
+        <button onclick="appendNumber('3')">3</button>
+        <button class="operator" onclick="appendOperator('+')">+</button>
+
+        <button onclick="appendNumber('0')">0</button>
+        <button onclick="appendNumber('.')">.</button>
+        <button class="equal" onclick="calculate()">=</button>
+    </div>
+</div>
+
+<script>
+    const display = document.getElementById('display');
+    let currentInput = '0';
+    let operator = null;
+    let previousInput = null;
+    let shouldResetScreen = false;
+
+    function updateDisplay() {
+        display.innerText = currentInput;
+    }
+
+    function appendNumber(number) {
+        if (currentInput === '0' || shouldResetScreen) {
+            currentInput = number;
+            shouldResetScreen = false;
+        } else {
+            if (number === '.' && currentInput.includes('.')) return;
+            currentInput += number;
+        }
+        updateDisplay();
+    }
+
+    function deleteDigit() {
+        if (shouldResetScreen) return;
+        if (currentInput.length === 1) {
+            currentInput = '0';
+        } else {
+            currentInput = currentInput.slice(0, -1);
+        }
+        updateDisplay();
+    }
+
+    function clearDisplay() {
+        currentInput = '0';
+        operator = null;
+        previousInput = null;
+        updateDisplay();
+    }
+
+    function appendOperator(op) {
+        if (operator !== null) calculate();
+        previousInput = currentInput;
+        operator = op;
+        shouldResetScreen = true;
+    }
+
+    function calculate() {
+        if (operator === null || shouldResetScreen) return;
+        let result;
+        const prev = parseFloat(previousInput);
+        const current = parseFloat(currentInput);
+
+        if (isNaN(prev) || isNaN(current)) return;
+
+        switch (operator) {
+            case '+':
+                result = prev + current;
+                break;
+            case '-':
+                result = prev - current;
+                break;
+            case '*':
+                result = prev * current;
+                break;
+            case '/':
+                if (current === 0) {
+                    alert('Cannot divide by zero');
+                    return;
+                }
+                result = prev / current;
+                break;
+            default:
+                return;
+        }
+        currentInput = result.toString();
+        operator = null;
+        updateDisplay();
+    }
+</script>
+
+</body>
+</html>
